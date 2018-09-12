@@ -1,0 +1,40 @@
+#!/bin/bash
+
+NONE=$(printf '\033[39m')
+RED=$(printf '\033[91m')
+GREEN=$(printf '\033[32m')
+BLUE=$(printf '\033[38;5;27m')
+ORANGE=$(printf '\033[38;5;178m')
+
+# This used to be used by PS1, that's now all handled by PHP
+#
+#function getGitDirty()
+#{
+#    STATUS=`git status 2>/dev/null`
+#    echo $STATUS | grep '#\s*\(new file\|modified\|deleted\):' | tr '\n' ' ' | sed -e "s/^.\\+$/${BLUE}*${GREEN}/g"
+#}
+#
+#function getGitBranch()
+#{
+#    DIRTY=`getGitDirty`
+#    git branch 2>/dev/null | sed -e '/^[^*]/d' -e "s/* \\(.*\\)/ ${GREEN}(${RED}\\1${DIRTY}${GREEN})${NONE}/"
+#}
+#
+#function getUser()
+#{
+#    whoami | sed -e "s/root/${RED}root${RED}/"
+#}
+#
+#function getIp()
+#{
+#    ip addr show | grep 192\.168\.243\. | sed -e "s/.*inet.192.168.243.\\([0-9]*\\).*/ ${RED}\\1${RED}/"
+#}
+#
+#export PS1="\[\e[1m${GREEN}\][\$(getUser)\[${GREEN}\]@\[${ORANGE}\]\h\[${GREEN}\]\$(getIp)\$(getGitBranch)\[${BLUE}\] \W\[${GREEN}\]]\\$ \[\e[0m$NONE\]"
+export PS1="\$(php ~/.ps1.php -j\$(jobs | wc -l))"
+
+alias ll='ls -alFh'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias g='grep --color=auto -r '
